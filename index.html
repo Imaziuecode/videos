@@ -18,6 +18,8 @@
     
   <style>
   
+  
+  
 /**
  * Swiper 9.1.1
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -672,7 +674,7 @@ swiper-container .swiper-notification {
 }
 .video_inside{
     width:100%;
-    height:100%;
+    max-height:100%;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -682,10 +684,12 @@ swiper-container .swiper-notification {
     position:absolute   ;
     
     
+    
 }
 
 video{
     width:100%;
+    max-height: 100%;
 }
 
 
@@ -866,21 +870,28 @@ body{
     
 }
 .input_cmts_and_close {
-    padding-left: 3%;
-    padding-right:3%;
+    padding: 3% 4% 1% 2%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: row;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
     color:black;
+    font-size: 17px;
+    border-bottom: .5px solid #ddd;
     
+  
 }
-
+h3{
+  margin:0;
+}
 .cc-cross {
     float: left;
     color:black;
+    font-size: 25px;
+    padding: 0;
     
 }
 .cmdt {
@@ -1210,6 +1221,65 @@ padding:3%;
     .swiper-slide {
       text-align: center;
       font-size: 18px;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-height: 100%;
+      overflow: hidden;
+      
+    }
+
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  
+  
+    html,
+    body {
+      position: relative;
+      height: 100%;
+    }
+
+    body {
+      background: #eee;
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+    }
+  .top_options{
+    position:absolute;
+    z-index:2;
+    width:100%;
+    border-bottom-right-radius:5px;
+    padding:3%;
+    margin:0;
+    top:0;
+
+    }
+    .bottom_short_options{
+position:absolute;
+z-index:2;
+width:100%;
+background-color:rgb(2,255,255,0.6);
+border-bottom:1px solid #ddd;
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+padding:3%;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
       background: #fff;
       display: flex;
       justify-content: center;
@@ -1222,9 +1292,69 @@ padding:3%;
       height: 100%;
       object-fit: cover;
     }
+    
+   .main-container {
+  display: flex; /* use flexbox to position child divs */
+  justify-content: space-between; /* space the child divs equally along the main container */
+  align-items: center; /* center the child divs vertically within the main container */
+   /* set the height of the main container */
+  /* set the background color of the main container */
+   /* add some padding to the main container */
+}
+
+.left-div,
+.right-div,
+.center-div {
+   /* set the height of the child divs */
+   /* set the width of the child divs */
+}
+
+.left-div {
+  
+}
+
+.center-div {
+  display:flex;
+  flex-direction:row;
+  
+}
+
+.right-div {
+  
+}
+
+
+.content_loader {
+ 
+  border: 2px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 2px solid  #cc208e;
+  width: 15px;
+  height: 15px;
+  -webkit-animation: spin 2s linear
+  infinite;
+  animation: spin 2s linear infinite;
+}
+
+
+
+
+
+
+
+@-webkit-keyframes spin {
+0% {-webkit-transform: rotate(0deg);}
+  100% { -webkit-transform:
+  rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
   </style>
   <script>
-     
+      
    const lite_svgs={
    "main_player":{
 "play":"https://dl.dropboxusercontent.com/s/rwpb9udvr9t95tn/play-svgrepo-com.svg",
@@ -1235,7 +1365,7 @@ padding:3%;
 "replies":"https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg"
 }
 }
-
+var videos=["https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%20Ek%20Hogaye%20Hum%20Or%20Tum%20Whatsapp%20Status%20%20Love%20Whatsapp%20Status%20%20Romantic%20Whatsapp%20Status_480p.mp4?alt=media&token=dc5e6fdb-4fc4-4fc1-8bdb-e8a1d526dc27","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F326146675_477039914637133_1771604610202372216_n.mp4?alt=media&token=ececd8c7-2d3f-4ecd-842b-b2f7b542ec8e","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F336773177_221880283684139_883392026456208898_n.mp4?alt=media&token=adbcb363-2b49-4f94-b1be-28f3e14b6ccd","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F7F4A557876827478DD7D8B8C220C2D84_video_dashinit.mp4?alt=media&token=461ee612-d7e8-4583-af67-5cbb47e6c049","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCHEHRE%20ME%20TERE%20KHUD%20KO%20MAI%20DHUNDU%E0%A5%A4%E0%A5%A4%20WHATSAPP%20STATUS___.mp4?alt=media&token=81cde31a-57ad-4902-918c-007e1c034db0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser%20(1).mp4?alt=media&token=8809c786-1800-48fa-b74f-89a877c7d9a0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser.mp4?alt=media&token=34ebaeaa-07e2-4cf2-8994-df909093012a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDaku%20Song%20Attitude%20Status%20ft.%20%40BeastBoyShub%20%40GamerFleet%20%40TechnoGamerzOfficial%20%40YesSmartyPie.mp4?alt=media&token=a5c26c07-ecad-466a-b660-f9685aaa69bb","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDecember%203%2C%202022.mp4?alt=media&token=7c8be9b9-2fef-4dc4-9f1c-19449fd60255","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDupte%20nunam.mp4?alt=media&token=c0e94df5-05bd-42f1-8b2b-70966d4df932","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FGwizzle%20x%20baby%20-%20justin%20bieber%20whatsapp%20status%20lyrics%20%40gwizzlex%20%40skeditzforever.mp4?alt=media&token=baf2d55a-1eb9-4d06-9827-6e6da0b35ff4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlive2.mp4?alt=media&token=a101af93-d047-4a94-a9a5-cd1e3de1d3ed","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlove1.mp4?alt=media&token=053b3dfb-b9a1-4e23-ba5d-25785d97f5b4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FJab%20samajhna%20nahin%20chahte%20tho%20samjhane%20ki%20bhi%20jarurat%20nahin%20%F0%9F%99%8C%F0%9F%AB%B0.mp4?alt=media&token=230c1dd5-c62d-4ebb-8837-a1f791ceda25","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSaveInsta.App%20-%202993804138217691213.mp4?alt=media&token=4066e467-6749-4aa6-8b0c-7c44191f93ff","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSad.mp4?alt=media&token=99fcfa7f-b25a-4d87-add8-72523e06dfb5","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FPyar%20Kiya%20To%20Nibhana20151_VidFog.mp4?alt=media&token=6ac679c0-57d4-4fb2-9468-01590aaa9b6f","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FNcs.mp4?alt=media&token=1558abbd-7b52-46cc-a08c-2ac4afffced0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FLove%20me%20like%20you%20do%20Ejlle%20Goulding%20song%20Asthetic%20Whatsapp%20status%20shorts%20Slowed%20version%20lyrics%20edit.mp4?alt=media&token=34d9a50f-471a-44cf-88d5-a15512a7a43d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTu%20Jo%20Nahin%20Hai%20To%20Kuch%20Bhi%20Nahin%20Hai%20WhatsApp%20Status%20Video.mp4?alt=media&token=23291d33-f3e1-4757-b85f-49f049388c81","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTumhiho.mp4?alt=media&token=b1af3661-2ef2-4bde-bb1f-c5381b24a407","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FUnknown%20brain.mp4?alt=media&token=f0836659-37ac-4543-a72b-79d11bd29a2d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTerafitoor.mp4?alt=media&token=e068b00e-4b1f-420f-bbb2-d6180379701d" ,"https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%F0%9F%98%82%F0%9F%98%82%40Sakshivk_03%20%23vkishere%20%23vksakshi%20%23shorts%20%23comedy%20%23youtube%20%23funny.mp4?alt=media&token=84d5a431-fdf6-4dba-8737-e317ae6d5652","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20kya%20keh%20Diya%20hai%20tumne%20o%20Janam%20_480p.mp4?alt=media&token=4960d70b-ee27-424a-8fcc-bc5a1b91f9d4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Kho%20Gaye%20Hum%20Kahan%20%20WhatsappStatus%20%20%20Aesthetic%20%20Status%20%20Instagram%20Reels%20%20Slowed%20Reverb%20_480p.mp4?alt=media&token=1e4f360e-73df-4018-b268-1b97537e0bb6","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Dj%20Kantik%20%20Kul%20Remix%20Ringtone%20Mp3%20%20Smart%20Ringtone%20shorts_480p.mp4?alt=media&token=a8258a24-998b-49f9-8346-cd5abe4921ec","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fterafitior1.mp4?alt=media&token=71f998c4-3530-4554-88d0-5664eae4e476","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fpal%20pal%20dil%20ke%20paas%E2%9D%A3%EF%B8%8F_%20%F0%9F%A5%B0%20Arijit%20Singh%20%F0%9F%91%91%20_%20Lofi%20Remix%20_%20%F0%9F%A6%8BWhatsApp%20_%20%F0%9F%92%ABAhestetic%20Status%20_%20%23shorts.mp4?alt=media&token=cdc62019-bb98-40c4-b893-3ebf4e76fa3b","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fkobilangw.mp4?alt=media&token=6f1543d8-2729-42fa-9779-743ea678020a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F_Dusk%20till%20dawn_%20best%20whatsapp%20status%F0%9F%94%A5audio%20edit%20%23shorts%20%23youtubeshorts.mp4?alt=media&token=90585be4-8e88-497c-b410-5620980ec485","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fbedard%20dade%20chane%20new%20kashmiri%20song%20ayan%20sajad%20status%20%23kashmirisongs%20%23whatsappstatus%20%23ytshorts%20(1)(0).mp4?alt=media&token=9dbdbdcd-f92e-4f2b-bf6c-1d2f4979e96d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FZara%20Sa%20-%20Jannat%F0%9F%98%8D.mp4?alt=media&token=9c6f2791-cf3d-4297-b1b1-82ddad962a18","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTera%20Mera%20Safar%20%5BSlowed%2BReverb%5D%20lofi%20%23Shorts%23shortvideo%23tranding%23.mp4?alt=media&token=787322f4-908e-4d95-ac59-63b479958eb0"];
 class Element {
     constructor(p) {
         p.parent !== undefined && (this.parent = p.parent);
@@ -1420,7 +1550,8 @@ attributes: {
 const div2 = document.getElementById("coner");
 
 // Get a reference to the parent element of div2
-const parent = div2.parentNode;
+
+const parent = document.querySelector("#coner").parentNode;
 
 // Remove the div2 element from the parent
 parent.removeChild(div2);
@@ -1929,8 +2060,10 @@ function toggleDialogVisibility(dialogElement) {
 
 
 
-var videos=["https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%20Ek%20Hogaye%20Hum%20Or%20Tum%20Whatsapp%20Status%20%20Love%20Whatsapp%20Status%20%20Romantic%20Whatsapp%20Status_480p.mp4?alt=media&token=dc5e6fdb-4fc4-4fc1-8bdb-e8a1d526dc27","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F326146675_477039914637133_1771604610202372216_n.mp4?alt=media&token=ececd8c7-2d3f-4ecd-842b-b2f7b542ec8e","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F336773177_221880283684139_883392026456208898_n.mp4?alt=media&token=adbcb363-2b49-4f94-b1be-28f3e14b6ccd","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F7F4A557876827478DD7D8B8C220C2D84_video_dashinit.mp4?alt=media&token=461ee612-d7e8-4583-af67-5cbb47e6c049","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCHEHRE%20ME%20TERE%20KHUD%20KO%20MAI%20DHUNDU%E0%A5%A4%E0%A5%A4%20WHATSAPP%20STATUS___.mp4?alt=media&token=81cde31a-57ad-4902-918c-007e1c034db0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser%20(1).mp4?alt=media&token=8809c786-1800-48fa-b74f-89a877c7d9a0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser.mp4?alt=media&token=34ebaeaa-07e2-4cf2-8994-df909093012a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDaku%20Song%20Attitude%20Status%20ft.%20%40BeastBoyShub%20%40GamerFleet%20%40TechnoGamerzOfficial%20%40YesSmartyPie.mp4?alt=media&token=a5c26c07-ecad-466a-b660-f9685aaa69bb","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDecember%203%2C%202022.mp4?alt=media&token=7c8be9b9-2fef-4dc4-9f1c-19449fd60255","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDupte%20nunam.mp4?alt=media&token=c0e94df5-05bd-42f1-8b2b-70966d4df932","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FGwizzle%20x%20baby%20-%20justin%20bieber%20whatsapp%20status%20lyrics%20%40gwizzlex%20%40skeditzforever.mp4?alt=media&token=baf2d55a-1eb9-4d06-9827-6e6da0b35ff4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlive2.mp4?alt=media&token=a101af93-d047-4a94-a9a5-cd1e3de1d3ed","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlove1.mp4?alt=media&token=053b3dfb-b9a1-4e23-ba5d-25785d97f5b4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FJab%20samajhna%20nahin%20chahte%20tho%20samjhane%20ki%20bhi%20jarurat%20nahin%20%F0%9F%99%8C%F0%9F%AB%B0.mp4?alt=media&token=230c1dd5-c62d-4ebb-8837-a1f791ceda25","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSaveInsta.App%20-%202993804138217691213.mp4?alt=media&token=4066e467-6749-4aa6-8b0c-7c44191f93ff","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSad.mp4?alt=media&token=99fcfa7f-b25a-4d87-add8-72523e06dfb5","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FPyar%20Kiya%20To%20Nibhana20151_VidFog.mp4?alt=media&token=6ac679c0-57d4-4fb2-9468-01590aaa9b6f","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FNcs.mp4?alt=media&token=1558abbd-7b52-46cc-a08c-2ac4afffced0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FLove%20me%20like%20you%20do%20Ejlle%20Goulding%20song%20Asthetic%20Whatsapp%20status%20shorts%20Slowed%20version%20lyrics%20edit.mp4?alt=media&token=34d9a50f-471a-44cf-88d5-a15512a7a43d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTu%20Jo%20Nahin%20Hai%20To%20Kuch%20Bhi%20Nahin%20Hai%20WhatsApp%20Status%20Video.mp4?alt=media&token=23291d33-f3e1-4757-b85f-49f049388c81","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTumhiho.mp4?alt=media&token=b1af3661-2ef2-4bde-bb1f-c5381b24a407","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FUnknown%20brain.mp4?alt=media&token=f0836659-37ac-4543-a72b-79d11bd29a2d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTerafitoor.mp4?alt=media&token=e068b00e-4b1f-420f-bbb2-d6180379701d" ,"https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%F0%9F%98%82%F0%9F%98%82%40Sakshivk_03%20%23vkishere%20%23vksakshi%20%23shorts%20%23comedy%20%23youtube%20%23funny.mp4?alt=media&token=84d5a431-fdf6-4dba-8737-e317ae6d5652","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20kya%20keh%20Diya%20hai%20tumne%20o%20Janam%20_480p.mp4?alt=media&token=4960d70b-ee27-424a-8fcc-bc5a1b91f9d4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Kho%20Gaye%20Hum%20Kahan%20%20WhatsappStatus%20%20%20Aesthetic%20%20Status%20%20Instagram%20Reels%20%20Slowed%20Reverb%20_480p.mp4?alt=media&token=1e4f360e-73df-4018-b268-1b97537e0bb6","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Dj%20Kantik%20%20Kul%20Remix%20Ringtone%20Mp3%20%20Smart%20Ringtone%20shorts_480p.mp4?alt=media&token=a8258a24-998b-49f9-8346-cd5abe4921ec","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fterafitior1.mp4?alt=media&token=71f998c4-3530-4554-88d0-5664eae4e476","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fpal%20pal%20dil%20ke%20paas%E2%9D%A3%EF%B8%8F_%20%F0%9F%A5%B0%20Arijit%20Singh%20%F0%9F%91%91%20_%20Lofi%20Remix%20_%20%F0%9F%A6%8BWhatsApp%20_%20%F0%9F%92%ABAhestetic%20Status%20_%20%23shorts.mp4?alt=media&token=cdc62019-bb98-40c4-b893-3ebf4e76fa3b","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fkobilangw.mp4?alt=media&token=6f1543d8-2729-42fa-9779-743ea678020a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F_Dusk%20till%20dawn_%20best%20whatsapp%20status%F0%9F%94%A5audio%20edit%20%23shorts%20%23youtubeshorts.mp4?alt=media&token=90585be4-8e88-497c-b410-5620980ec485","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fbedard%20dade%20chane%20new%20kashmiri%20song%20ayan%20sajad%20status%20%23kashmirisongs%20%23whatsappstatus%20%23ytshorts%20(1)(0).mp4?alt=media&token=9dbdbdcd-f92e-4f2b-bf6c-1d2f4979e96d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FZara%20Sa%20-%20Jannat%F0%9F%98%8D.mp4?alt=media&token=9c6f2791-cf3d-4297-b1b1-82ddad962a18","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTera%20Mera%20Safar%20%5BSlowed%2BReverb%5D%20lofi%20%23Shorts%23shortvideo%23tranding%23.mp4?alt=media&token=787322f4-908e-4d95-ac59-63b479958eb0"]
+
 function getRandomElement(arr) {
+  var arr=["https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%20Ek%20Hogaye%20Hum%20Or%20Tum%20Whatsapp%20Status%20%20Love%20Whatsapp%20Status%20%20Romantic%20Whatsapp%20Status_480p.mp4?alt=media&token=dc5e6fdb-4fc4-4fc1-8bdb-e8a1d526dc27","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F326146675_477039914637133_1771604610202372216_n.mp4?alt=media&token=ececd8c7-2d3f-4ecd-842b-b2f7b542ec8e","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F336773177_221880283684139_883392026456208898_n.mp4?alt=media&token=adbcb363-2b49-4f94-b1be-28f3e14b6ccd","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F7F4A557876827478DD7D8B8C220C2D84_video_dashinit.mp4?alt=media&token=461ee612-d7e8-4583-af67-5cbb47e6c049","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCHEHRE%20ME%20TERE%20KHUD%20KO%20MAI%20DHUNDU%E0%A5%A4%E0%A5%A4%20WHATSAPP%20STATUS___.mp4?alt=media&token=81cde31a-57ad-4902-918c-007e1c034db0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser%20(1).mp4?alt=media&token=8809c786-1800-48fa-b74f-89a877c7d9a0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FCloser.mp4?alt=media&token=34ebaeaa-07e2-4cf2-8994-df909093012a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDaku%20Song%20Attitude%20Status%20ft.%20%40BeastBoyShub%20%40GamerFleet%20%40TechnoGamerzOfficial%20%40YesSmartyPie.mp4?alt=media&token=a5c26c07-ecad-466a-b660-f9685aaa69bb","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDecember%203%2C%202022.mp4?alt=media&token=7c8be9b9-2fef-4dc4-9f1c-19449fd60255","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FDupte%20nunam.mp4?alt=media&token=c0e94df5-05bd-42f1-8b2b-70966d4df932","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FGwizzle%20x%20baby%20-%20justin%20bieber%20whatsapp%20status%20lyrics%20%40gwizzlex%20%40skeditzforever.mp4?alt=media&token=baf2d55a-1eb9-4d06-9827-6e6da0b35ff4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlive2.mp4?alt=media&token=a101af93-d047-4a94-a9a5-cd1e3de1d3ed","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FIminlove1.mp4?alt=media&token=053b3dfb-b9a1-4e23-ba5d-25785d97f5b4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FJab%20samajhna%20nahin%20chahte%20tho%20samjhane%20ki%20bhi%20jarurat%20nahin%20%F0%9F%99%8C%F0%9F%AB%B0.mp4?alt=media&token=230c1dd5-c62d-4ebb-8837-a1f791ceda25","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSaveInsta.App%20-%202993804138217691213.mp4?alt=media&token=4066e467-6749-4aa6-8b0c-7c44191f93ff","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FSad.mp4?alt=media&token=99fcfa7f-b25a-4d87-add8-72523e06dfb5","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FPyar%20Kiya%20To%20Nibhana20151_VidFog.mp4?alt=media&token=6ac679c0-57d4-4fb2-9468-01590aaa9b6f","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FNcs.mp4?alt=media&token=1558abbd-7b52-46cc-a08c-2ac4afffced0","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FLove%20me%20like%20you%20do%20Ejlle%20Goulding%20song%20Asthetic%20Whatsapp%20status%20shorts%20Slowed%20version%20lyrics%20edit.mp4?alt=media&token=34d9a50f-471a-44cf-88d5-a15512a7a43d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTu%20Jo%20Nahin%20Hai%20To%20Kuch%20Bhi%20Nahin%20Hai%20WhatsApp%20Status%20Video.mp4?alt=media&token=23291d33-f3e1-4757-b85f-49f049388c81","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTumhiho.mp4?alt=media&token=b1af3661-2ef2-4bde-bb1f-c5381b24a407","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FUnknown%20brain.mp4?alt=media&token=f0836659-37ac-4543-a72b-79d11bd29a2d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTerafitoor.mp4?alt=media&token=e068b00e-4b1f-420f-bbb2-d6180379701d" ,"https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F%F0%9F%98%82%F0%9F%98%82%40Sakshivk_03%20%23vkishere%20%23vksakshi%20%23shorts%20%23comedy%20%23youtube%20%23funny.mp4?alt=media&token=84d5a431-fdf6-4dba-8737-e317ae6d5652","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20kya%20keh%20Diya%20hai%20tumne%20o%20Janam%20_480p.mp4?alt=media&token=4960d70b-ee27-424a-8fcc-bc5a1b91f9d4","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Kho%20Gaye%20Hum%20Kahan%20%20WhatsappStatus%20%20%20Aesthetic%20%20Status%20%20Instagram%20Reels%20%20Slowed%20Reverb%20_480p.mp4?alt=media&token=1e4f360e-73df-4018-b268-1b97537e0bb6","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fy2mate.com%20-%20Dj%20Kantik%20%20Kul%20Remix%20Ringtone%20Mp3%20%20Smart%20Ringtone%20shorts_480p.mp4?alt=media&token=a8258a24-998b-49f9-8346-cd5abe4921ec","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fterafitior1.mp4?alt=media&token=71f998c4-3530-4554-88d0-5664eae4e476","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fpal%20pal%20dil%20ke%20paas%E2%9D%A3%EF%B8%8F_%20%F0%9F%A5%B0%20Arijit%20Singh%20%F0%9F%91%91%20_%20Lofi%20Remix%20_%20%F0%9F%A6%8BWhatsApp%20_%20%F0%9F%92%ABAhestetic%20Status%20_%20%23shorts.mp4?alt=media&token=cdc62019-bb98-40c4-b893-3ebf4e76fa3b","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fkobilangw.mp4?alt=media&token=6f1543d8-2729-42fa-9779-743ea678020a","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2F_Dusk%20till%20dawn_%20best%20whatsapp%20status%F0%9F%94%A5audio%20edit%20%23shorts%20%23youtubeshorts.mp4?alt=media&token=90585be4-8e88-497c-b410-5620980ec485","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2Fbedard%20dade%20chane%20new%20kashmiri%20song%20ayan%20sajad%20status%20%23kashmirisongs%20%23whatsappstatus%20%23ytshorts%20(1)(0).mp4?alt=media&token=9dbdbdcd-f92e-4f2b-bf6c-1d2f4979e96d","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FZara%20Sa%20-%20Jannat%F0%9F%98%8D.mp4?alt=media&token=9c6f2791-cf3d-4297-b1b1-82ddad962a18","https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTera%20Mera%20Safar%20%5BSlowed%2BReverb%5D%20lofi%20%23Shorts%23shortvideo%23tranding%23.mp4?alt=media&token=787322f4-908e-4d95-ac59-63b479958eb0"];
+
   const randomIndex = Math.floor(Math.random() * arr.length);
   return arr[randomIndex];
 }
@@ -2027,14 +2160,25 @@ function updateProgress(video) {
 
       
   </script>
-  
 </head>
 
 <body>
   <!-- Swiper -->
   <div class="swiper mySwiper">
-  <div class="top_options">
-      <i class="fas fa-arrow-left custom-icon-size shadow_new"></i>
+  <div class="top_options main-container">
+  
+  <div class="left-div">
+       <i class="fas fa-arrow-left custom-icon-size shadow_new"></i>
+  </div>
+  <div class="center-div" id="l_m">
+    
+  </div>
+  <div class="right-div">
+       <i style="margin-right:4vw" class="fas fa-ellipsis-v custom-icon-size shadow_new"></i>
+
+  </div>
+
+     
       
   </div>
   
@@ -2045,1147 +2189,9 @@ function updateProgress(video) {
  <div style="color:rgb(50,0,230);background-color:rgb(50,0,230,.2);padding:4%;border-radius:10px;margin-bottom:1vh;margin-top:1vh">Remember to keep comments respectfull checkout <span style="color:rgb(0,0,200,.7);font-weight:800">Guidelines</span></div>
 
 
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/Picsart_23-03-27_14-12-28-589.jpg?alt=media&token=5dc62d07-ccef-4e9f-bcb0-67d7bcecfd00">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Furqan Elahie</div>
-            
-        <div class="verified"></div>
-        <div class="pro">PRO</div>
-            </div>
-            <div class="posting-time_x">Feb 25, 2023</div>
-            <div class="user-comment_x">Z10</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/Picsart_23-02-27_22-29-19-230.jpg?alt=media&token=ea78b3b3-8226-4fa2-9d8a-8be56da35299">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Mehak Jan</div>
-            
-       
-            </div>
-            <div class="posting-time_x">Feb 25, 2023</div>
-            <div class="user-comment_x">Cute jgr meoun boii punun</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/Fotor_AI.png.jpg?alt=media&token=4a276437-af1e-4b55-80f7-7e0cd5efadf9">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">help onfreefire</div>
-            
-       
-            </div>
-            <div class="posting-time_x">Feb 25, 2023</div>
-            <div class="user-comment_x">Nice</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">7k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">3k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
      
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJWfoQRQYSYc4DCc8kMJ8TI_ART2pesNLpLlcrCsVjpvEvzsAcmBTKl37HGRT6tG=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Javid Javidbhatt</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">Feb 08, 2023</div>
-            <div class="user-comment_x">Husf</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
 
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
 
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJUK65S4kgerPqqqFvSFvMoQc8iNvd37yzVzyjnL60P7ii_TCQUMzRsBVZiZRbLU=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Lone Aamir</div>
-            
-       
-            </div>
-            <div class="posting-time_x">21 Nov 2022</div>
-            <div class="user-comment_x">❤❤❤❤❤❤🧡</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJU06t1i3RfPVRthZPuoJBH9-ExA17M2kX5VB8d7dHIVx4mZvLY6-mr7m-RG7cg9=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">bhat zoya</div>
-            
-       
-            </div>
-            <div class="posting-time_x">08 Nov 2022</div>
-            <div class="user-comment_x">Ocm bro</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">3k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">1k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJVYhTyvo_fxypDVekWxx7GPhhHyCkoFPMme0TajeAuFLsx49f5qkx6WpI4GA9Jp=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Muskaan Muskaan</div>
-            
-       
-            </div>
-            <div class="posting-time_x">07 Nov 2022</div>
-            <div class="user-comment_x">Nyc👌</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">1k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJWBwxugNqRZoUeSBS1FC5YfcQwsX7gJomv2v-mSJaOY_m8xiMndF1hES1gJ1_Xm=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Sahil Wani</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">06 Nov 2022</div>
-            <div class="user-comment_x">♥️♥️</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">9.5k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">3.6k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJWvk-OXpXYQf9nG9oaa3XoFt7aPEGl2wys598KTJnD-io71dbUfOw9J8YFfbQQZ=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Nazir Ahmad</div>
-            
-       
-            </div>
-            <div class="posting-time_x">04 Nov 2022</div>
-            <div class="user-comment_x">Nice👍👍</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">12k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">4.1k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJWd-9CJdhcFWqEqEgFY4bpzK69bdViuycDTOlpEcfrjTDTkz9N22W8AYQO6OKmv=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Bilkisa Rashid</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">13 Oct 2022</div>
-            <div class="user-comment_x">💜💜💜💜💜💜💜</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJW6dNwdDK1dsSwp_09fHNBdflzjxn_Jo3GedS6vKmofU0X7DbGsatgExJsaWDNo=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Mir zainab</div>
-            
-       
-            </div>
-            <div class="posting-time_x">04 Oct 2022</div>
-            <div class="user-comment_x">Yai dol</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJW6dNwdDK1dsSwp_09fHNBdflzjxn_Jo3GedS6vKmofU0X7DbGsatgExJsaWDNo=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Mir zainab</div>
-            
-       
-            </div>
-            <div class="posting-time_x">04 Oct 2022</div>
-            <div class="user-comment_x">Gobur che ka krn ye</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">3.1M</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">128k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJXFVZlcsMqGRsJTI_g-AF-7kyf6kd2F5lE8hnxad-fk7scI1LulbBn-Amkvio9C=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Umar Rashid</div>
-            
-       
-            </div>
-            <div class="posting-time_x">04 Oct 2022</div>
-            <div class="user-comment_x">Mashallah 💜💜💜</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">20k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">11k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJUvTtZJaXzYooSDrn_4bEuLxflL9TFoWBkFIA=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Reenu Reenu</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">02 Oct 2022</div>
-            <div class="user-comment_x">Love this song ❤️❤️</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJUWwvPVSr-Foopuk6Q23DZ_pnNp8Z8KkScJUQ=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">zara Malla</div>
-            
-       
-            </div>
-            <div class="posting-time_x">01 Oct 2022</div>
-            <div class="user-comment_x">❤️❤️❤️</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">2.9k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">1.7k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJWb6WHi8WwN6R5J-HmscwXHiHYzShMhBI7j2Ha2SCqKt7Uut3_DU2bcebOhlS5_=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Nusrat Rasool</div>
-            
-       
-            </div>
-            <div class="posting-time_x">01 Oct 2022</div>
-            <div class="user-comment_x">Outstanding</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">19k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">10k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJULeteygWRYbGzlkVLQKhl9gW-uGsL7pYt1eQ=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Ruquiya Gull</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">30 Sep 2022</div>
-            <div class="user-comment_x">Mashallah🥰</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">18.5k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">7.3k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJXGIMl9aE0s6oWotnlhjKjcym69o8HIsGIw6g=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Manzoor Bhat</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">19 Sep 2022</div>
-            <div class="user-comment_x">So sweet,</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">16k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">4.6k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJVV40jvsyFPTXUBMZQxNFkcTs9gVJhAYoKdmh5akuY4Aw6IayxQ-GaqZx7DRl4n=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Gh Kumar</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">09 Aug 2022</div>
-            <div class="user-comment_x">Super</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">3.3k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">1.1k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJXkjLKuxeizi8sn4P5H21DW1FEM4W3i9omv65d4Umv-HE1E0QL4NGQRy1O9mgPf=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Sammy Aabid</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">31 May 2022</div>
-            <div class="user-comment_x">❤❤❤</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">9k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">2k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJUDmet4XlskgT3QNHy2uijtCShFPucQdUs9L4QRs7VrAYQy0w4la1ZpJgZkV4m_=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Umer Reshi</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">17 Apr 2022</div>
-            <div class="user-comment_x">Wonderful❤️❤️❤️❤️❤️</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">28k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">11k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/wzxcpKHzsCaq4FflJyd1kRI4F-hWEsV_F-sTzPPR55hvd5h3XpL-BWzyXIV3G6-LiKjhe-iY=s48-c-k-c0x00ffffff-no-rj" onerror="this.onerror=null; this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDaz8rMAqILS8Re0Ex6OT_tUgyRGtkYOS3-w&usqp=CAU'">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Baba~rafid</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">02 Apr 2022</div>
-            <div class="user-comment_x">⭐⭐⭐</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">5k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">2.5k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJW6Z_wA7GbReMCfexXG6fJiCcxN07QAjIP1HwgO5zpiHDQTE2STRj8GWxvR95wU=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Raja Raja</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">01 Apr 2022</div>
-            <div class="user-comment_x">🖤🖤💯</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">10k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">3k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJW6Z_wA7GbReMCfexXG6fJiCcxN07QAjIP1HwgO5zpiHDQTE2STRj8GWxvR95wU=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Raja Raja</div>
-            
-        <div class="verified"></div>
-            </div>
-            <div class="posting-time_x">01 Apr 2022</div>
-            <div class="user-comment_x">❤️❤️❤️❤️</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">9k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">2.4k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/qeorJMLzeXde46VR8ZlbfRQXYLN0j_jOcUyLxDgkUL2yADSiyOCFM9CKjpFMnX_NXGhipax1=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">seezar 4ever</div>
-            
-       
-            </div>
-            <div class="posting-time_x">29 Mar 2022</div>
-            <div class="user-comment_x">Super hasa super</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">33k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">12k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
-    
-    
-   
-
-
-    
-     <div style="min-height:10vh" class="sub-div-f">
-    <div class="sub-div">
-        <img class="user-profile" src="https://yt3.ggpht.com/ytc/AL5GRJVgx319XekeNPIt6vOMXG0lZ_ztcEId-SajIpdGJFSwJeb_WfRi2mQ63nKq4tny=s48-c-k-c0x00ffffff-no-rj">
-        <div class="userdata">
-        <div style="display:flex;flex-direction:row">
-            <div style="margin-right:0" class="user-name_x">Hanzala Javid</div>
-            
-       
-            </div>
-            <div class="posting-time_x">28 Mar 2022</div>
-            <div class="user-comment_x">Super💛💛</div>
-            
-            
-       <div class="comment_stastic">
-  <div class="likes_comments">
-    <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/uav9azjcqw5uf3u/5dd3bbc1-a1cc-4691-a57a-0b33b0d3a5c8.png?dl=0">
-
-    <span class="like-count">17k</span>
-  </div>
-  <div class="replies_comments">
-  <img class="comment_svg" src="https://dl.dropboxusercontent.com/s/8cst7pyreqz9g01/reply-all-2-svgrepo-com.svg">
-    <span class="reply-count">6.8k</span>
-  </div>
-   <div class="replies_comments">
-    <span style="font-weight:500" class="reply-count"> Reply</span>
-  </div>
-  
-</div>
-
-    
-        </div>
-        
-        </div>
-        
-    
-        
-    </div>
-    
     
     
    
@@ -3321,11 +2327,11 @@ function updateProgress(video) {
   </div>
  
    </div>
-      <div class="swiper-slide" data-ad="true" data-watched="false">
+      <div class="swiper-slide">
           
      <div class="video_inside">
          
-           <video poster="https://dl.dropboxusercontent.com/s/abq9mj83pfq45ri/download%20%283%29.png?dl=0"   loop onclick="this.play()" preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/videos1%2FTujh%20Mein%20Hi%20Rab%20Dikhta%20Hai%20Yara%20mai%20kya%20karu%20%F0%9F%98%8D%20love%20video%20status%20%F0%9F%A5%B0%20%23whatappstatus%20%23shorts.mp4?alt=media&token=de988145-ecec-4210-9af0-8dc3674bef6f"></video>
+           <video poster="https://dl.dropboxusercontent.com/s/abq9mj83pfq45ri/download%20%283%29.png?dl=0"   loop onclick="this.play()" preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/tera%20Mera%20Safar%20slowed%20%26%20reverb%20song%20lyrics%20lofi%23shortvideo.mp4?alt=media&token=97b34207-2d6d-4df7-8251-31c8a58a7c84"></video>
      </div>
   
        <div class="left_side_info">
@@ -3388,12 +2394,237 @@ function updateProgress(video) {
        </div>
         
    </div>
+   
+   
+   
+   
+    <div class="swiper-slide">
+          
+     <div class="video_inside">
+         
+           <video poster="https://dl.dropboxusercontent.com/s/abq9mj83pfq45ri/download%20%283%29.png?dl=0"   loop onclick="this.play()" preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/tera%20Mera%20Safar%20slowed%20%26%20reverb%20song%20lyrics%20lofi%23shortvideo.mp4?alt=media&token=97b34207-2d6d-4df7-8251-31c8a58a7c84"></video>
+     </div>
+  
+       <div class="left_side_info">
+           <div class="picture">
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyF1UiImSYJNvHYhZjnyYXN2h9JpdAWrPmFA&usqp=CAU" class="profile_img shadows"/>
+           </div>
+           
+           <div class="data">
+           <div class="follow_plus_ifad">
+            <div class="follow same_color  shadows">follow</div>
+            <div class="ad">ad</div>
+            <div class="ad-swipe-in ellipse">Swipe in</div>
+            <span class="swipe_in_text"> 3s</span>
+            </div>
+            <div class="publisher_plus_verified"> 
+               <div class="publisher same_color shadows ellipse">Furqan Elahie</div>
+             <div class="verified"></div>
+               </div>
+                 <div class="title same_color shadows ellipse">Im a bad boy i wanna kill you today</div>
+                
+            </div>     
+           </div>
+       
+       <div class="right_side_info">
+           <div class="likes_box shadows">
+                <i class="white far fa-heart custom-icon-size shadow_new" onclick="liked(this)"></i> 
+                <div class="likes_text_count shadow_new">2.5M</div>
+           </div>
+            <div class="shadows comments_box">
+              <i class="far fa-comment-dots custom-icon-size shadow_new"></i>
+               <div class="comments_text_count shadow_new">1.9K</div>
+           </div>
+            <div class="shadows shares_box">
+             <i class="far fa-share-square custom-icon-size shadow_new"></i>
+
+ 
+
+
+           </div>
+            <div class="shadows report_box">
+        
+
+
+
+
+
+
+<i class="fas fa-ellipsis-v custom-icon-size opacity-less shadow_new"></i>
+
+
+
+
+
+           </div>
+           <!--
+            <div class="shadows share_box">
+               shar
+           </div>
+           -->
+       </div>
+        
+   </div>
+   
+   
+   
+   
+   
+    <div class="swiper-slide">
+          
+     <div class="video_inside">
+         
+           <video poster="https://dl.dropboxusercontent.com/s/abq9mj83pfq45ri/download%20%283%29.png?dl=0"   loop onclick="this.play()" preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/tera%20Mera%20Safar%20slowed%20%26%20reverb%20song%20lyrics%20lofi%23shortvideo.mp4?alt=media&token=97b34207-2d6d-4df7-8251-31c8a58a7c84"></video>
+     </div>
+  
+       <div class="left_side_info">
+           <div class="picture">
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyF1UiImSYJNvHYhZjnyYXN2h9JpdAWrPmFA&usqp=CAU" class="profile_img shadows"/>
+           </div>
+           
+           <div class="data">
+           <div class="follow_plus_ifad">
+            <div class="follow same_color  shadows">follow</div>
+            <div class="ad">ad</div>
+            <div class="ad-swipe-in ellipse">Swipe in</div>
+            <span class="swipe_in_text"> 3s</span>
+            </div>
+            <div class="publisher_plus_verified"> 
+               <div class="publisher same_color shadows ellipse">Furqan Elahie</div>
+             <div class="verified"></div>
+               </div>
+                 <div class="title same_color shadows ellipse">Im a bad boy i wanna kill you today</div>
+                
+            </div>     
+           </div>
+       
+       <div class="right_side_info">
+           <div class="likes_box shadows">
+                <i class="white far fa-heart custom-icon-size shadow_new" onclick="liked(this)"></i> 
+                <div class="likes_text_count shadow_new">2.5M</div>
+           </div>
+            <div class="shadows comments_box">
+              <i class="far fa-comment-dots custom-icon-size shadow_new"></i>
+               <div class="comments_text_count shadow_new">1.9K</div>
+           </div>
+            <div class="shadows shares_box">
+             <i class="far fa-share-square custom-icon-size shadow_new"></i>
+
+ 
+
+
+           </div>
+            <div class="shadows report_box">
+        
+
+
+
+
+
+
+<i class="fas fa-ellipsis-v custom-icon-size opacity-less shadow_new"></i>
+
+
+
+
+
+           </div>
+           <!--
+            <div class="shadows share_box">
+               shar
+           </div>
+           -->
+       </div>
+        
+   </div>
+   
+   
+   
+   
+   <div class="swiper-slide">
+          
+     <div class="video_inside">
+         
+           <video poster="https://dl.dropboxusercontent.com/s/abq9mj83pfq45ri/download%20%283%29.png?dl=0"   loop onclick="this.play()" preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/tera%20Mera%20Safar%20slowed%20%26%20reverb%20song%20lyrics%20lofi%23shortvideo.mp4?alt=media&token=97b34207-2d6d-4df7-8251-31c8a58a7c84"></video>
+     </div>
+  
+       <div class="left_side_info">
+           <div class="picture">
+           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyF1UiImSYJNvHYhZjnyYXN2h9JpdAWrPmFA&usqp=CAU" class="profile_img shadows"/>
+           </div>
+           
+           <div class="data">
+           <div class="follow_plus_ifad">
+            <div class="follow same_color  shadows">follow</div>
+            <div class="ad">ad</div>
+            <div class="ad-swipe-in ellipse">Swipe in</div>
+            <span class="swipe_in_text"> 3s</span>
+            </div>
+            <div class="publisher_plus_verified"> 
+               <div class="publisher same_color shadows ellipse">Furqan Elahie</div>
+             <div class="verified"></div>
+               </div>
+                 <div class="title same_color shadows ellipse">Im a bad boy i wanna kill you today</div>
+                
+            </div>     
+           </div>
+       
+       <div class="right_side_info">
+           <div class="likes_box shadows">
+                <i class="white far fa-heart custom-icon-size shadow_new" onclick="liked(this)"></i> 
+                <div class="likes_text_count shadow_new">2.5M</div>
+           </div>
+            <div class="shadows comments_box">
+              <i class="far fa-comment-dots custom-icon-size shadow_new"></i>
+               <div class="comments_text_count shadow_new">1.9K</div>
+           </div>
+            <div class="shadows shares_box">
+             <i class="far fa-share-square custom-icon-size shadow_new"></i>
+
+ 
+
+
+           </div>
+            <div class="shadows report_box">
+        
+
+
+
+
+
+
+<i class="fas fa-ellipsis-v custom-icon-size opacity-less shadow_new"></i>
+
+
+
+
+
+           </div>
+           <!--
+            <div class="shadows share_box">
+               shar
+           </div>
+           -->
+       </div>
+        
+   </div>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
       <div class="swiper-slide">
           
           
      <div class="video_inside">
          
-         <video   loop onclick="this.play()"  preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/Daku%20_%F0%9F%93%9B%20Thar%20attitude%20Status%20_%20%F0%9F%98%88Daku%20song%20attitude%20%F0%9F%91%BFStatus.mp4?alt=media&token=11f2bd30-9d06-486b-9c4b-6b984a7fc338"></video>
+         <video   loop onclick="this.play()"  preload="none" src="https://firebasestorage.googleapis.com/v0/b/myimaziue.appspot.com/o/tera%20Mera%20Safar%20slowed%20%26%20reverb%20song%20lyrics%20lofi%23shortvideo.mp4?alt=media&token=97b34207-2d6d-4df7-8251-31c8a58a7c84"></video>
      </div>
   
        <div class="left_side_info">
@@ -3522,7 +2753,12 @@ function updateProgress(video) {
       </div>
     
     </div>
-
+<div class="autoplay-progress">
+      <svg viewBox="0 0 48 48">
+        <circle cx="24" cy="24" r="20"></circle>
+      </svg>
+      <span></span>
+    </div>
   </div>
 
   <!-- Swiper JS -->
@@ -3530,18 +2766,45 @@ function updateProgress(video) {
 
   <!-- Initialize Swiper -->
   <script>
+  
     var swiper = new Swiper(".mySwiper",
     
      {
-      direction:"vertical"
+     threshold: 3,
+     speed: 200,
+      direction:"vertical",
+      
      });
      mySwiper=swiper;
+   
+     mySwiper.on( 'doubleTap', function() { 
+     
+     
+     var currentSlide = mySwiper.slides[mySwiper.activeIndex];
+     
+var currentLikebtn = currentSlide.querySelector('.likes_box i');
+
+
+if (currentLikebtn) {
+  liked(
+      currentLikebtn
+  )
+}
+
+     
+     
+     });
+     
+     
+     
      mySwiper.on( 'slideChange', function() { 
+     /*
 const subDivs = document.querySelectorAll('.sub-div-f');
 subDivs.forEach((subDiv) => {
   subDiv.remove();
 });
-NewData(div2a);
+NewData(document.querySelector("#div2a"));
+*/
   var currentSlide = swiper.slides[swiper.activeIndex];
   var video = currentSlide.querySelector('video');
 
@@ -3589,31 +2852,32 @@ NewData(div2a);
   }
 
 
-if ( mySwiper.activeIndex > mySwiper.previousIndex ) { 
-  var v = document.getElementsByTagName('video');
-  for (var i = 0, len = v.length; i < len; i++) {
-    v[i].pause();
-  }
+var currentSlide = mySwiper.slides[mySwiper.activeIndex];
+var currentVideo = currentSlide.querySelector('video');
+if(currentVideo){
+if (currentVideo) {
+  currentVideo.currentTime = 0;
+  currentVideo.play();
+}
+}
+var nextSlide = mySwiper.slides[mySwiper.activeIndex + 1];
+var nextVideo = nextSlide ? nextSlide.querySelector('video') : null;
+if (nextVideo) {
+  nextVideo.preload = 'auto';
+}
 
-  v[mySwiper.activeIndex].currentTime = 0;    
-  v[mySwiper.activeIndex].play();
-
-  if(v[mySwiper.activeIndex+1]){
-    v[mySwiper.activeIndex+1].preload = 'auto';
-  }
-} else { 
-  var v = document.getElementsByTagName('video');
-  for (var i = 0, len = v.length; i < len; i++) {
-    v[i].pause();
-  }
-
-  v[mySwiper.activeIndex].currentTime = 0;    
-  v[mySwiper.activeIndex].play();
+var previousSlide = mySwiper.slides[mySwiper.previousIndex];
+var previousVideo = previousSlide ? previousSlide.querySelector('video') : null;
+if (previousVideo) {
+  previousVideo.pause();
 }
 
 
 
 
+ 
+     
+    
  
      
     
@@ -3625,6 +2889,8 @@ if ( mySwiper.activeIndex > mySwiper.previousIndex ) {
      
      var secondToLastIndex = swiper.slides.length - 2;
   if (swiper.activeIndex >= secondToLastIndex) {
+  l_m.innerHTML=`Loading More...   <div class="content_loader"></div>`;
+  
     console.log("Asking server for new data");
      
      var comments_data_var=[]
@@ -3636,8 +2902,9 @@ fetch('https://random-data-api.com/api/users/random_user?size=5')
     // Map the user data to the desired format
      comments_data_var = users.map((user, i) => {
       // Select a random comment text and time
+      
       const src = 
-    getRandomElement(videos );
+    getRandomElement();
       const text =
 extractVideoUrl(
     src);
@@ -3663,13 +2930,13 @@ extractVideoUrl(
     
     
     // Get a reference to the div2 element
+var to_be_added=[];
 
-var fragment =  document.createDocumentFragment();
     for (i = 0; i < comments_data_var.length; i++) {
     
     
     
-    
+    var fragment =  document.createDocumentFragment();
     var  x=getAd();
     
    var element1 = new Element({
@@ -3948,30 +3215,36 @@ var element28 = new Element({
 
 }).create();
   
+ to_be_added.push(element1.outerHTML);
  
-        
 
     }
+swiper.appendSlide(to_be_added);
+to_be_added=Array();
+l_m.innerHTML=``;
 
-    
+    /*
 swiper_wrapper.append(fragment);
     mySwiper.update();
     fragment.textContent = null;
-    
-    var v = document.getElementsByTagName('video');
-    for (var i = 0, len = v.length; i < len; i++) {
-      v[i].pause();
-      }
-v[mySwiper.activeIndex].currentTime=0;    
-v[mySwiper.activeIndex].play();
-   /* alert(
-        JSON.stringify(
-            comments_data_var 
-        ,null,2)
-    )*/
-  })
-  .catch(error => console.error(error));
+    */
+    var currentSlide = mySwiper.slides[mySwiper.activeIndex];
+var currentVideo = currentSlide.querySelector('video');
+var videos = document.getElementsByTagName('video');
 
+for (var i = 0, len = videos.length; i < len; i++) {
+  if (videos[i] !== currentVideo) {
+    videos[i].pause();
+  }
+}
+if(currentVideo){
+currentVideo.currentTime = 0;
+currentVideo.play();
+
+}
+  }).catch(error => console.error(error));
+  
+  
 
     
 
@@ -3984,7 +3257,25 @@ v[mySwiper.activeIndex].play();
      
      
      }
+     var previousSlides = Array.from(document.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)')).slice(0, mySwiper.previousIndex);
+    if (previousSlides.length > 4) {
+        var numToRemove = previousSlides.length - 4;
+        for (var i = 0; i < numToRemove; i++) {
+        
+if (!previousSlides[i].classList.contains('removed_slide')) {
+ 
+      previousSlides[i].innerHTML=`<span style="color:white;font-weight:400;">Removed for smooth experience<br><small>You can find it in history</small></span>`;
+ previousSlides[i].classList.add("removed_slide"); 
+ 
+ }         
+        }
+        
+    }
+    
      })
+     
+     
+    
      
      
   </script>
