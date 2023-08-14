@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Firebase</title>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/c9705384ae.js" crossorigin="anonymous"></script>
+    <!-- The core Firebase JS -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+    <!-- Firebase Database-->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-database.js"></script>
+    <!-- Local Files -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script defer type="text/javascript" src = "app.js"></script>
+    <!-- Optimized for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Optimized for mobile --> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+}
+
+html {
+    font-size: 10px;
+    /* To make REMs usage easier*/
+}
+body {
+    
+}
+
+.halk{
+    
+    color:white;
+    width:30px;
+    height:30px;
+}
+
+
+ul.messages {
+    height: 75vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+ul.messages li {
+    padding:1%;
+    
+    
+    border-radius: 1rem;
+}
+
+.message-text {
+    padding: 0.5rem;
+    
+}
+
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    height: 15vh;
+    -webkit-box-shadow: 0px -1px 4px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px -1px 4px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px -1px 4px -2px rgba(0,0,0,0.75);
+    background:white;
+}
+
+.bottom-bar button {
+    padding: 1.4rem;
+    border-radius: 50%;
+    background: #FF5722;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+
+}
+
+.bottom-bar .message {
+    width: 90%;
+}
+
+input, button {
+    outline: none;
+    border: none;
+
+}
+
+.top-bar {
+    height: 10vh;
+    width: 100%;
+    background: #FF5722;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+    -webkit-box-shadow: 0px 1px 4px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 1px 4px -2px rgba(0,0,0,0.75);
+    box-shadow: 0px 1px 4px -2px rgba(0,0,0,0.75);
+    
+}
+
+.username {
+    margin-left: 10px;
+    overflow: hidden;
+}
+
+.login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 2rem;
+    overflow: scroll;
+}
+
+.login-form {
+    border: 1px solid #444;
+    padding: 0.5rem;
+    width: 100%;
+}
+#mt{
+    font-size:60%;
+    
+}
+.start {
+    background: #FF5722;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    margin: 1rem auto;
+    width: 100%;
+
+
+}
+
+.login form {
+    width: 100%;
+}
+
+.login h1 {
+    font-size: 3rem;
+}
+
+.login img {
+    width: 90%;
+    height: auto;    
+}
+
+
+@media screen and (min-width: 580px) {
+  .login img {
+    width: 60%;
+    height: auto;    
+  }
+
+}
+
+
+@media screen and (min-width: 780px) {
+  .login img {
+    width: 40%;
+    height: auto;    
+  }
+
+}
+
+.login.slide-up {
+    transition: top 1s ease;
+    top: -150%;
+
+}
+
+.system_message{
+    
+    
+    background-color:rgb(0,0,255,.2);
+    color:rgb(0,0,255,.7);
+    margin:10px;
+    width:80%;
+    padding:1%;
+    border:1px  rgb(0,0,255,.7) solid;
+    border-radius:10px;
+}
+ul.messages li { display: flex; justify-content: flex-start; /* Align received messages to the left */  }
+ul.messages li.sent .message-container {
+    text-align: right;
+    background: #FF5722;
+    color: #ffffff;
+    margin-left: auto;
+     justify-content: flex-end; 
+     
+     justify-content: flex-end; /* Align sent messages to the right */
+}
+
+ul.messages li.received .message-container {
+    text-align: left;
+    background: #F0F0F0;
+    color: #000000;
+    margin-right: auto;
+}
+
+.message-container {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    max-width: 70%; /* Adjust this value to control the maximum width of the message container */
+}
+
+/* Adjust other styling as needed */
+
+ul.messages {
+    list-style-type: none; /* Hide bullet points */
+    /* Your other styles */
+}
+
+ul.messages li {
+    /* Your existing styles for the messages */
+}
+
+body {
+
+  
+    
+    line-height: 1.5;
+}
+
+.conversation-title {
+    text-align: center;
+    height:10vh;
+    background: linear-gradient(to bottom right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: #fff;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  position:fixed;
+  border-radius:0px 0px 10px 10px;
+}
+
+
+
+.status {
+    font-size: 12px;
+}
+
+.conversation-wrapper {
+    background: #f9f9f9;
+    padding: 25px;
+    min-height: 500px;
+    max-width:100%;
+    
+}
+
+.message-received {
+    padding: 0;
+    text-align: left;
+    margin-left:2%;
+}
+
+.message-sent {
+    padding: 0;
+    text-align: right;
+    margin-right:2%;
+     
+    
+}
+
+.bubble {
+    border-radius: 8px;
+    background: #fff;
+    padding: 12px 18px;
+    border: .5px solid rgba(0,0,0,0.02);
+    box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+    max-width: 70%;
+    display: inline-block;
+    text-align: left;
+}
+
+
+.bs{
+     background-color:rgb(0,0,255,.2);
+}
+
+.timestamp {
+    margin: 8px 0;
+    
+}
+
+
+.avatar {
+    border-radius: 50%;
+    background: linear-gradient(to top right, rgb(252, 74, 26), rgb(247, 183, 51));
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: top;
+    color: #fff;
+    font-size: 10px;
+    text-align: center;
+     border: .5px solid rgba(0,0,0,0.02);
+    box-shadow: 0 2px 1px rgba(0,0,0,0.08);
+ 
+
+
+}
+.avatar.notme{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0BaHBOwO0_ZierX8cUeHnB5DXrKWCagINEg&usqp=CAU'); background-size: cover; background-position: center; 
+}
+.avatar.me{
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS44sM3rQQhD_7CSwmNiGxgZ2vGI7gSGh5CQ&usqp=CAU'); background-size: cover; background-position: center; 
+}
+.time {
+    display: inline-block;
+    font-size: 12px;
+    color: #999;
+    margin: 0 5px;
+}
+
+.messaging-area {
+    width:100%;
+    box-shadow: 0 -2px 1px rgba(0,0,0,0.03);
+    display:flex;
+    flex-direction:row;
+    position:fixed;
+    bottom:0;
+    max-height:10vh;
+}
+
+input {
+    border: none;
+    padding: 20px 30px;
+    width:80%;
+    
+}
+
+.buttonr {
+    display: inline-block;
+    background: linear-gradient(to top right, rgb(252, 74, 26), rgb(247, 183, 51));
+    color: #fff;
+    width: 57px;
+    height: 57px;
+    padding: 8px 10px 12px;
+    max-width:20%;
+    font-size: 1em;
+    text-align: center;
+    border: none;
+}
+
+.firstmessage{
+    margin-top:10vh;
+}
+.lastmessage{
+    margin-bottom:100vh;
+}
+
+.spx{
+    font-weight:800;
+    letter-spacing:1px;
+    font-size: 12px;
+}
+img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]{ display: none; }
+
+
+</style>
+    <!-- Optimized for mobile --> <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+<script>
+
+
+
+
+
+</script>
+</head>
+<body>
+    <div class = "login">
+        <h1>Talk to the whole world. Anytime. Anywhere.</h1>
+        <img src="https://i.ibb.co/7X1MrGL/undraw-connected-world-wuay.png" alt="undraw-connected-world-wuay" border="0">
+        <form onsubmit="return login()">
+            <label for = "name">Enter your name:</label>
+            <input class = "login-form" type="text" name="name" placeholder="Enter your name" autocomplete="off" required="true">
+            <button class = "start" type="submit" value="Get started">Get started</button>
+
+        </form>
+        
+    </div>
+    <div class = "messenger">
+        <div class = "top-bar">
+            <span id="mt">Global Chat</span>
+            
+            ‪<svg id="clear-chats-btn" onclick="clearChats()" class="halk"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5.50506 11.4096L6.03539 11.9399L5.50506 11.4096ZM3 14.9522H2.25H3ZM9.04776 21V21.75V21ZM11.4096 5.50506L10.8792 4.97473L11.4096 5.50506ZM17.9646 12.0601L12.0601 17.9646L13.1208 19.0253L19.0253 13.1208L17.9646 12.0601ZM6.03539 11.9399L11.9399 6.03539L10.8792 4.97473L4.97473 10.8792L6.03539 11.9399ZM6.03539 17.9646C5.18538 17.1146 4.60235 16.5293 4.22253 16.0315C3.85592 15.551 3.75 15.2411 3.75 14.9522H2.25C2.25 15.701 2.56159 16.3274 3.03 16.9414C3.48521 17.538 4.1547 18.2052 4.97473 19.0253L6.03539 17.9646ZM4.97473 10.8792C4.1547 11.6993 3.48521 12.3665 3.03 12.9631C2.56159 13.577 2.25 14.2035 2.25 14.9522H3.75C3.75 14.6633 3.85592 14.3535 4.22253 13.873C4.60235 13.3752 5.18538 12.7899 6.03539 11.9399L4.97473 10.8792ZM12.0601 17.9646C11.2101 18.8146 10.6248 19.3977 10.127 19.7775C9.64651 20.1441 9.33665 20.25 9.04776 20.25V21.75C9.79649 21.75 10.423 21.4384 11.0369 20.97C11.6335 20.5148 12.3008 19.8453 13.1208 19.0253L12.0601 17.9646ZM4.97473 19.0253C5.79476 19.8453 6.46201 20.5148 7.05863 20.97C7.67256 21.4384 8.29902 21.75 9.04776 21.75V20.25C8.75886 20.25 8.449 20.1441 7.9685 19.7775C7.47069 19.3977 6.88541 18.8146 6.03539 17.9646L4.97473 19.0253ZM17.9646 6.03539C18.8146 6.88541 19.3977 7.47069 19.7775 7.9685C20.1441 8.449 20.25 8.75886 20.25 9.04776H21.75C21.75 8.29902 21.4384 7.67256 20.97 7.05863C20.5148 6.46201 19.8453 5.79476 19.0253 4.97473L17.9646 6.03539ZM19.0253 13.1208C19.8453 12.3008 20.5148 11.6335 20.97 11.0369C21.4384 10.423 21.75 9.79649 21.75 9.04776H20.25C20.25 9.33665 20.1441 9.64651 19.7775 10.127C19.3977 10.6248 18.8146 11.2101 17.9646 12.0601L19.0253 13.1208ZM19.0253 4.97473C18.2052 4.1547 17.538 3.48521 16.9414 3.03C16.3274 2.56159 15.701 2.25 14.9522 2.25V3.75C15.2411 3.75 15.551 3.85592 16.0315 4.22253C16.5293 4.60235 17.1146 5.18538 17.9646 6.03539L19.0253 4.97473ZM11.9399 6.03539C12.7899 5.18538 13.3752 4.60235 13.873 4.22253C14.3535 3.85592 14.6633 3.75 14.9522 3.75V2.25C14.2035 2.25 13.577 2.56159 12.9631 3.03C12.3665 3.48521 11.6993 4.1547 10.8792 4.97473L11.9399 6.03539Z" fill="#ffffff"></path> <path opacity="0.5" d="M13.2411 17.8444C13.534 18.1372 14.0089 18.1372 14.3018 17.8444C14.5946 17.5515 14.5946 17.0766 14.3018 16.7837L13.2411 17.8444ZM7.21637 9.69831C6.92347 9.40541 6.4486 9.40541 6.15571 9.69831C5.86281 9.9912 5.86281 10.4661 6.15571 10.759L7.21637 9.69831ZM14.3018 16.7837L7.21637 9.69831L6.15571 10.759L13.2411 17.8444L14.3018 16.7837Z" fill="#ffffff"></path> <path opacity="0.5" d="M9 21H21" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"></path> </g></svg>
+
+            
+            <span><i class="fa fa-user-circle"></i><span class = "username">User</span></span>
+        </div>
+        <ul class = "messages">
+            
+            
+            
+            
+        </ul>
+        <form class = "bottom-bar" onsubmit="return sendMessage()">
+            <input id="ci" type="text" class="message" placeholder="Enter a message..." autocomplete="off" required="true" oninvalid="this.setCustomValidity('You cannot send an empty message')">
+            <button type="submit" value="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+    </div>
+    
+    <script>
+ const urlParams = new URLSearchParams(window.location.search);
+const ref_ = urlParams.get('ref');
+
+var name="user";
+// Function to format the timestamp
+function formatTimestamp(timestamp) {
+    const now = new Date();
+    const date = new Date(timestamp);
+
+    if (isSameDay(now, date)) {
+        return formatDateWithAmPm(date);
+    } else if (isYesterday(now, date)) {
+        return "Yesterday " + formatDateWithAmPm(date);
+    } else {
+        return formatDateWithDay(date) + " at " + formatDateWithAmPm(date);
+    }
+}
+
+// Function to check if two dates are on the same day
+function isSameDay(date1, date2) {
+    return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+    );
+}
+
+// Function to check if date2 is one day before date1
+function isYesterday(date1, date2) {
+    const yesterday = new Date(date1);
+    yesterday.setDate(yesterday.getDate() - 1);
+    return isSameDay(yesterday, date2);
+}
+
+// Function to format date with day (e.g., 11 Jun 2023)
+function formatDateWithDay(date) {
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+}
+
+// Function to format date with time and AM/PM (e.g., 2:30 PM)
+function formatDateWithAmPm(date) {
+    const options = { hour: "numeric", minute: "numeric", hour12: true };
+    return date.toLocaleTimeString("en-US", options);
+}
+
+// Example usage
+
+window.onload=function(){
+    const firebaseConfig = {
+    apiKey: "AIzaSyBJLunaVFMT0OKJBEBM3exOgUCl7WuKl00",
+      authDomain: "hurtless-33668.firebaseapp.com",
+      projectId: "hurtless-33668",
+      storageBucket: "hurtless-33668.appspot.com",
+      messagingSenderId: "1037111034293",
+      appId: "1:1037111034293:web:2b22b203d4f55884f019fc",
+      measurementId: "G-MN87Y7MHNN"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+ 
+
+
+firebase.database().ref("data/"+ref_).on("child_added", (snapshot) => {
+    let sender = snapshot.val().sender;
+    let message = snapshot.val().message;
+let time = snapshot.val().time;
+    let messageClass = sender === name ? "sent" : "received";
+    var bs="";
+    if(messageClass=="sent"){
+        messageClass="message-sent";
+        bs="bs";
+    }else{
+        
+        messageClass="message-received";
+        bs="";
+    }
+    let messageHtml = `
+    
+     <section class="${messageClass} firstmessagel">
+               <div class="bubble ${bs}">${message}</div>
+               <section class="timestamp">
+                   <div class="avatar notme"></div>
+                   <div class="time">
+                 <span class="spx">${sender}:</span>  ${formatTimestamp(time)}
+                   
+                   
+                   </div>
+               </section>
+            </section>
+    
+    
+    
+    `;
+    document.querySelector(".messages").insertAdjacentHTML("beforeend", messageHtml);
+
+    let messageList = document.querySelector(".messages");
+    messageList.scrollTop = messageList.scrollHeight;
+});
+
+
+
+let isFirstLoad = true;
+    firebase.database().ref("c/"+"clearChatSignal"+ref_).on("value", (snapshot) => {
+    
+    if (!isFirstLoad) {
+    
+   
+    document.querySelector(".messages").innerHTML = `
+    <div class=" system_message">
+            
+            Chat has been cleared
+            </div>
+    
+    `;
+    
+    }
+    
+    isFirstLoad = false;
+    
+});
+
+
+
+
+    
+    
+    
+    
+    let isFirstLoad2 = true;
+    let isFirstLoad3 = true;
+
+// Replace with your user ID
+
+
+firebase.database().ref("c/typingSignal"+ref_).on("value", (snapshot) => {
+
+if(
+    !isFirstLoad3
+){
+
+    const typingUser = snapshot.val();
+
+    if (typingUser.name == name) {
+        // Clear the typing status since you are typing
+        
+    } else {
+        // Display typing status
+        mt.textContent = typingUser.name+" is typing...";
+    } 
+    
+     }else{
+        
+        
+    isFirstLoad2=false;
+    }
+    
+    
+    }
+);
+
+
+
+firebase.database().ref("c/nottypingSignal"+ref_).on("value", (snapshot) => {
+
+if(
+    !isFirstLoad3
+){
+
+    const nottypingUser = snapshot.val();
+
+    if (nottypingUser.name == name) {
+        // Clear the typing status since you are typing
+        
+    } else {
+        // Display typing status
+        mt.textContent = "";
+    } 
+    
+     }else{
+        
+        
+    isFirstLoad3=false;
+    }
+});
+    
+    
+    
+    
+   
+    
+
+    
+    
+    const inputField = document.getElementById('ci');
+
+let typingTimeout;
+
+inputField.addEventListener('input', () => {
+
+    clearTimeout(typingTimeout);
+
+    // Update typing status
+    firebase.database().ref("c/typingSignal"+ref_).set({name:name,time:Date.now()});
+
+    typingTimeout = setTimeout(() => {
+        // Clear typing status
+        firebase.database().ref("c/nottypingSignal"+ref_).set({name:name,time:Date.now()});
+        
+        
+        
+        
+    },1500); // Adjust the delay as needed
+});
+    }
+  // Listen for changes to the "clearChatSignal" reference
+
+const myUserId = name; 
+
+    
+
+function clearChats() { if (confirm("Are you sure you want to clear all chats  for all?")) { // Remove messages from the databas
+
+
+ firebase.database().ref("data/"+ref_).remove(); // Update the "clearChatSignal" value to the current timestamp
+ 
+ 
+  firebase.database().ref("c/clearChatSignal"+ref_).set(Date.now()); } }
+  
+
+function sendMessage () {
+    // function to send a message into the database
+    let message = document.querySelector(".message").value;
+    while(message.indexOf("<")!=-1){
+        message = message.replace("<", "[Invalid Character]");
+    }
+    while(message.indexOf(">")!=-1){
+        message = message.replace(">", "[Invalid Character]");
+    }
+    while(message.indexOf("/")!=-1){
+        message = message.replace("/", "[Invalid Character]");
+    }
+    while(message.indexOf("eval")!=-1){
+        message = message.replace("eval", "[Invalid Expression]");
+    }
+    while(message.indexOf("img")!=-1){
+        message = message.replace("img", "[Invalid Expression]");
+    }
+    
+
+
+    
+        firebase.database().ref("data/"+ref_).push().set({
+            "sender":name,
+            "message":message,
+            "time":Date.now()
+
+        })
+    document.querySelector(".message").value = "";    
+
+    return false;
+}
+function login () {
+    //console.log("function")
+    name = document.querySelector(".login-form").value;
+    
+    while(name.indexOf("<")!=-1){
+        name = name.replace("<", "[Invalid Character]");
+    }
+    while(name.indexOf(">")!=-1){
+        name = name.replace(">", "[Invalid Character]");
+    }
+    while(name.indexOf("/")!=-1){
+        name = name.replace("/", "[Invalid Character]");
+    }
+    while(name.indexOf("eval")!=-1){
+        name = name.replace("eval", "[Invalid Expression]");
+    }
+    while(name.indexOf("img")!=-1){
+        name = name.replace("img", "[Invalid Expression]");
+    }
+
+    
+    if (name.length > 20){
+        name = name.slice(0, 20)
+    }
+    document.querySelector(".username").textContent = name;
+    document.querySelector(".login").classList.add("slide-up");
+    
+    return false; 
+}
+
+
+</script>
+
+<div style="text-align:right;position:fixed;z-index:9999999;bottom:0;width:auto;right:1%;cursor:pointer;line-height:0;display:block!important"><a title="Hosted on free web hosting 000webhost.com. Host your own website for FREE." target="_blank" href="https://www.000webhost.com/?utm_source=000webhostapp&utm_campaign=000_logo&utm_medium=website&utm_content=footer_img"><img src="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png" alt="www.000webhost.com"></a></div><script>function getCookie(t){for(var e=t+"=",n=decodeURIComponent(document.cookie).split(";"),o=0;o<n.length;o++){for(var i=n[o];" "==i.charAt(0);)i=i.substring(1);if(0==i.indexOf(e))return i.substring(e.length,i.length)}return""}getCookie("hostinger")&&(document.cookie="hostinger=;expires=Thu, 01 Jan 1970 00:00:01 GMT;",location.reload());var wordpressAdminBody=document.getElementsByClassName("wp-admin")[0],notification=document.getElementsByClassName("notice notice-success is-dismissible"),hostingerLogo=document.getElementsByClassName("hlogo"),mainContent=document.getElementsByClassName("notice_content")[0];if(null!=wordpressAdminBody&&0<notification.length&&null!=mainContent){var googleFont=document.createElement("link");googleFontHref=document.createAttribute("href"),googleFontRel=document.createAttribute("rel"),googleFontHref.value="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700",googleFontRel.value="stylesheet",googleFont.setAttributeNode(googleFontHref),googleFont.setAttributeNode(googleFontRel);var css="@media only screen and (max-width: 576px) {#main_content {max-width: 320px !important;} #main_content h1 {font-size: 30px !important;} #main_content h2 {font-size: 40px !important; margin: 20px 0 !important;} #main_content p {font-size: 14px !important;} #main_content .content-wrapper {text-align: center !important;}} @media only screen and (max-width: 781px) {#main_content {margin: auto; justify-content: center; max-width: 445px;}} @media only screen and (max-width: 1325px) {.web-hosting-90-off-image-wrapper {position: absolute; max-width: 95% !important;} .notice_content {justify-content: center;} .web-hosting-90-off-image {opacity: 1;}} @media only screen and (min-width: 769px) {.notice_content {justify-content: space-between;} #main_content {margin-left: 5%; max-width: 445px;} .web-hosting-90-off-image-wrapper {position: absolute; display: flex; justify-content: center; width: 50%; margin-left: 45%;}} .web-hosting-90-off-image {max-width: 90%;} .content-wrapper {min-height: 454px; display: flex; flex-direction: column; justify-content: center; z-index: 5} .notice_content {display: flex; align-items: center;} * {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;} .upgrade_button_red_sale{box-shadow: 0 2px 4px 0 rgba(255, 69, 70, 0.2); width: 264px; border: 0; border-radius: 3px; background-color: #FF5C62 !important; padding: 15px 55px !important; font-family: 'Roboto', sans-serif; font-size: 16px; font-weight: 600; color: #ffffff;} .upgrade_button_red_sale:hover{color: #ffffff !important; background: #d10303 !important;}",style=document.createElement("style"),sheet=window.document.styleSheets[0];style.styleSheet?style.styleSheet.cssText=css:style.appendChild(document.createTextNode(css)),document.getElementsByTagName("head")[0].appendChild(style),document.getElementsByTagName("head")[0].appendChild(googleFont);var button=document.getElementsByClassName("upgrade_button_red")[0],link=button.parentElement;link.setAttribute("href","https://www.hostinger.com/hosting-starter-offer?utm_source=000webhost&utm_medium=panel&utm_campaign=000-wp"),link.innerHTML='<button class="upgrade_button_red_sale">Claim Deal</button>',(notification=notification[0]).setAttribute("style","padding-bottom: 0; padding-top: 5px; background-color: #040713; background-size: cover; background-repeat: no-repeat; color: #ffffff; border-left-color: #040713;"),notification.className="notice notice-error is-dismissible";var mainContentHolder=document.getElementById("main_content");mainContentHolder.setAttribute("style","padding: 0;"),hostingerLogo[0].remove();var h1Tag=notification.getElementsByTagName("H1")[0];h1Tag.className="000-h1",h1Tag.innerHTML="Black Friday",h1Tag.setAttribute("style",'color: white; font-family: "Roboto", sans-serif; font-size: 48px; font-weight: 700;');var h2Tag=document.createElement("H2");h2Tag.innerHTML="Up to 90% off 4-year hosting plans + free domain, SSL & DDoS protection",h2Tag.setAttribute("style",'color: white; margin: 10px 0 15px 0; font-family: "Roboto", sans-serif; font-size: 16px; font-weight: 400; line-height: 1;'),h1Tag.parentNode.insertBefore(h2Tag,h1Tag.nextSibling);var paragraph=notification.getElementsByTagName("p")[0];paragraph.innerHTML="$<span style='font-size: 80px;'>2.49</span>/mo",paragraph.setAttribute("style",'font-family: "Roboto", sans-serif; font-size: 48px; font-weight: 700; margin: 0;');var list=notification.getElementsByTagName("UL")[0];list.remove();var org_html=mainContent.innerHTML,new_html='<div class="content-wrapper">'+mainContent.innerHTML+'</div><div class="web-hosting-90-off-image-wrapper"><img class="web-hosting-90-off-image" src="https://cdn.000webhost.com/000webhost/promotions/bf-2022-bottom-banner.png"></div>';mainContent.innerHTML=new_html;var saleImage=mainContent.getElementsByClassName("web-hosting-90-off-image")[0]}</script></body>
+</html>
