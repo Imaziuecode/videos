@@ -1,0 +1,929 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.1.2/css/material-design-iconic-font.min.css">
+   <script src="https://kit.fontawesome.com/c9705384ae.js" crossorigin="anonymous"></script>
+    <!-- The core Firebase JS -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+    <!-- Firebase Database-->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-database.js"></script>
+    <!-- Local Files -->
+       <!-- Created by I Am Rochie -->
+  <!-- In Collaboration with Mesmerizer -->
+       <!-- Here we have a WhatsApp -->
+       <title> 🐒 ChatClone 🐒 </title>
+ <!-- Probably they never gonna reply you -->
+  
+  
+   <!-- Coz they were scripted only to     
+                       receive messages -->
+ 
+  <!-- Copy for Educational purpose only -->
+ <style>
+     
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+       
+*{
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marvel-device .screen {
+  text-align: left;
+}
+
+.screen-container {
+  height: 100%;
+  width:100%;
+}
+           /* Status Bar setup */
+
+.status-bar {
+  height: 25px;
+  background: #004e45;
+  color: #fff;
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.status-bar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.status-bar div {
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0 0 0 8px;
+  font-weight: 600;
+}
+
+.chat {
+  height: calc(100% - 0px);
+}
+
+.chat-container {
+  height: 100%;
+}
+
+.user-bar {
+  height: 55px;
+  background: #005e54;
+  color: #fff;
+  padding: 0 8px;
+  font-size: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.user-bar:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.user-bar div {
+  float: left;
+  transform: translateY(-50%);
+  position: relative;
+  top: 50%;
+}
+
+.user-bar .actions {
+  float: right;
+  margin: 0 0 0 20px;
+}
+
+.user-bar .actions.more {
+  margin: 0 12px 0 32px;
+}
+
+.user-bar .actions.attachment {
+  margin: 0 0 0 30px;
+}
+
+.user-bar .actions.attachment i {
+  display: block;
+  transform: rotate(-45deg);
+}
+
+.user-bar .avatar {
+  margin: 0 0 0 5px;
+  width: 36px;
+  height: 36px;
+}
+
+.user-bar .avatar img {
+  border-radius: 50%;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1);
+  display: block;
+  width: 100%;
+}
+
+.user-bar .name {
+  font-size: 17px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  letter-spacing: 0.3px;
+  margin: 0 0 0 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 110px;
+}
+
+.user-bar .status {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.conversation {
+    height: calc(100% - 55px);
+  position: relative;
+  background: #efe7dd url("https://i.ibb.co/kXp9SLV/Background-image.jpg") repeat;
+  z-index: 0;
+}
+
+.conversation ::-webkit-scrollbar {
+  transition: all .5s;
+  width: 5px;
+  height: 1px;
+  z-index: 10;
+}
+
+.conversation ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.conversation ::-webkit-scrollbar-thumb {
+  background: #b3ada7;
+}
+
+.conversation .conversation-container {
+  height: calc(100% - 60px);
+  box-shadow: inset 0 10px 10px -10px #000000;
+  overflow-x: hidden;
+  padding: 0 16px;
+  margin-bottom: 5px;
+}
+
+.conversation .conversation-container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.message {
+  color: #000;
+  clear: both;
+  line-height: 18px;
+  font-size: 15px;
+  padding: 8px;
+  position: relative;
+  margin: 8px 0;
+  max-width: 85%;
+  word-wrap: break-word;
+  z-index: -1;
+}
+
+.message:after {
+  position: absolute;
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.metadata {
+  display: inline-block;
+  justify-content:space-between;
+  padding: 0 0 0 7px;
+  position: relative;
+  bottom: -4px;
+}
+
+.metadata .time {
+  color: rgba(0, 0, 0, .45);
+  font-size: 11px;
+  display: inline-block;
+}
+.metadata .name {
+  color: rgba(0, 0, 0, .45);
+  font-size: 11px;
+  display: inline-block;
+}
+.metadata .tick {
+  display: inline-block;
+  margin-left: 2px;
+  position: relative;
+  top: 4px;
+  height: 16px;
+  width: 16px;
+}
+
+.metadata .tick svg {
+  position: absolute;
+  transition: .5s ease-in-out;
+}
+
+.metadata .tick svg:first-child {
+  backface-visibility: hidden;
+  transform: perspective(800px) rotateY(180deg);
+}
+
+.metadata .tick svg:last-child {
+  backface-visibility: hidden;
+  transform: perspective(800px) rotateY(0deg);
+}
+
+.metadata .tick-animation svg:first-child {
+ transform: perspective(800px) rotateY(0);
+}
+
+.metadata .tick-animation svg:last-child {
+ transform: perspective(800px) rotateY(-179.9deg);
+}
+
+.message:first-child {
+  margin: 16px 0 8px;
+}
+
+.message.received {
+  background: #fff;
+  border-radius: 0px 5px 5px 5px;
+  float: left;
+}
+.message.system{
+    background-color:rgb(0,255,0,0.3);
+}
+.message.received .metadata {
+  padding: 0 0 0 16px;
+}
+
+.message.received:after {
+  border-width: 0px 10px 10px 0;
+  border-color: transparent #fff transparent transparent;
+  top: 0;
+  left: -10px;
+}
+
+.message.sent {
+  background: #e1ffc7;
+  border-radius: 5px 0px 5px 5px;
+  float: right;
+}
+
+.message.sent:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #e1ffc7;
+  top: 0;
+  right: -10px;
+}
+
+.conversation-compose {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  overflow: hidden;
+  height: 50px;
+  width: 100%;
+  z-index: 2;
+}
+
+.conversation-compose div,
+.conversation-compose input {
+  background: #fff;
+  height: 100%;
+}
+
+.conversation-compose .emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 5px 0 0 5px;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  width: 48px;
+}
+
+.conversation-compose .input-msg {
+  border: 0;
+  flex: 1 1 auto;
+  font-size: 16px;
+  margin: 0;
+  outline: none;
+  min-width: 50px;
+}
+
+.conversation-compose .photo {
+  flex: 0 0 auto;
+  border-radius: 0 0 5px 0;
+  text-align: center;
+  position: relative;
+  width: 48px;
+}
+
+.conversation-compose .photo:after {
+  border-width: 0px 0 10px 10px;
+  border-color: transparent transparent transparent #fff;
+  border-style: solid;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: "";
+  top: 0;
+  right: -10px;
+}
+
+.conversation-compose .photo i {
+  display: block;
+  color: #7d8488;
+  font-size: 24px;
+  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+}
+
+.conversation-compose .send {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  flex: 0 0 auto;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0;
+  position: relative;
+  outline: none;
+}
+
+.conversation-compose .send .circle {
+  background: #008a7c;
+  border-radius: 50%;
+  color: #fff;
+  position: relative;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.conversation-compose .send .circle i {
+  font-size: 24px;
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .marvel-device.nexus5 {
+    border-radius: 0;
+    flex: none;
+    padding: 0;
+    max-width: none;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+
+  .marvel-device > .screen .chat {
+    visibility: visible;
+  }
+
+  .marvel-device {
+    visibility: hidden;
+  }
+
+  .marvel-device .status-bar {
+    display: none;
+  }
+
+  .screen-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .conversation {
+    height: calc(100% - 55px);
+  }
+  
+  .conversation .conversation-container {
+    height: calc(100% - 80px);
+  }
+}
+
+#spp{
+    color:rgb(0,0,0,.5);
+    margin-left:5px;
+    font-size:14px;
+}
+img[src*="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]{ display: none; }
+
+     #infoDiv {
+            width: 80%;
+            height: auto;
+            background-color: #3498db;
+            border-radius: 20px;
+            text-align: center;
+            color: #ffffff;
+            font-size: 12px;
+            padding: 20px;
+        }
+ </style>
+ 
+ <script>
+     
+      function newMessage(e) {
+  var input = e.target.input;
+
+  if (input.value) {
+  /*
+    var message = buildMessage(input.value);
+    conversation.appendChild(message);
+    
+    */
+    
+    firebase.database().ref("data/"+ref_).push().set({
+            "sender":name,
+            "message":input.value,
+            "time":Date.now(),
+            "string":string 
+            
+
+        })
+         input.value = '';
+  conversation.scrollTop = conversation.scrollHeight;
+input.focus() ;       
+  
+    
+    //animateMessage(message);
+  }
+
+ e.preventDefault();
+
+}
+
+function em(a){
+    return document.querySelector(a);
+}
+function msg(a){
+    
+}
+
+ </script>
+</head>
+<body>
+
+ <div class="page">
+  <div class="screen-container">
+   <div class="chat">
+    <div class="chat-container">
+     <div class="user-bar">
+      <div class="back">
+       <!--- <i class="zmdi zmdi-arrow-left"></i>-->
+      </div>   
+  
+    <!--  <div class="avatar">   
+       <img src="https://i.ibb.co/8g2bmNB/Dp.jpg" alt="Avatar">
+      </div>--->
+   
+      <div class="name">
+        <span>Chat</span>
+        <span class="status"></span>
+      </div>
+
+    <!--  <div class="actions more">
+        <i class="zmdi zmdi-more-vert"></i>
+      </div>
+ 
+      <div class="actions attachment">
+        <i class="zmdi zmdi-attachment-alt"></i>
+      </div>--->
+
+      <div class="actions" onclick="clearChats()">
+        <i class="zmdi zmdi-delete"></i>
+      </div>
+     </div>
+    
+      <div class="conversation" id="c1">
+    
+      <div class="conversation-container" id="c2">
+    <center>
+    
+  <div id="infoDiv">
+        This is created and being managed by furqanelahie
+    </div>
+      </center>
+     </div>
+   <span id="spp"></span>
+    <form class="conversation-compose">
+     <div class="emoji">
+       
+     </div> 
+  
+     <input class="input-msg" name="input" placeholder="Type a message" autocomplete="off"></input>
+   
+    
+   
+     <button class="send">    
+       <div class="circle">
+         <i class="zmdi zmdi-mail-send"></i>
+       </div>
+     </button>
+    </form>
+  
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script> 
+
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const ref_ = urlParams.get('ref');
+var name = "user";
+var string = "";
+
+try {
+  // Attempt to access local storage
+  localStorage.setItem(ref_, ref_);
+  localStorage.removeItem(ref_);
+
+  // Check if name and string exist in local storage
+  var storedName = localStorage.getItem("name");
+  var storedString = localStorage.getItem("randomString");
+
+  if (!storedName || !storedString) {
+    // Prompt the user to enter a name
+    var userName = prompt("Please enter your name:");
+
+    // If the user didn't enter anything, keep prompting until they do
+    while (!userName) {
+      userName = prompt("Please enter your name (required):");
+    }
+
+    // Generate a random string
+    var randomString =
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15);
+
+    // Store the name and random string in local storage
+    localStorage.setItem("name", userName);
+    localStorage.setItem("randomString", randomString);
+
+    name = userName;
+    string = randomString;
+  } else {
+    name = storedName;
+    string = storedString;
+  }
+} catch (e) {
+  // Local storage is not available or access is denied
+  var userName = prompt("Please enter your name:");
+
+  // If the user didn't enter anything, keep prompting until they do
+  while (!userName) {
+    userName = prompt("Please enter your name (required):");
+  }
+
+  // Generate a random string
+  var randomString =
+    Math.random().toString(36).substring(2, 15) +
+    Math.random().toString(36).substring(2, 15);
+
+  name = userName;
+  string = randomString;
+}
+
+
+    var messageTime = document.querySelectorAll('.message .time');
+
+
+
+
+
+var form = document.querySelector('.conversation-compose');
+var conversation = document.querySelector('.conversation-container');
+
+    
+    
+// Function to format the timestamp
+function formatTimestamp(timestamp) {
+    const now = new Date();
+    const date = new Date(timestamp);
+
+    if (isSameDay(now, date)) {
+        return formatDateWithAmPm(date);
+    } else if (isYesterday(now, date)) {
+        return "Yesterday " + formatDateWithAmPm(date);
+    } else {
+        return formatDateWithDay(date) + " at " + formatDateWithAmPm(date);
+    }
+}
+
+// Function to check if two dates are on the same day
+function isSameDay(date1, date2) {
+    return (
+        date1.getFullYear() === date2.getFullYear() &&
+        date1.getMonth() === date2.getMonth() &&
+        date1.getDate() === date2.getDate()
+    );
+}
+
+// Function to check if date2 is one day before date1
+function isYesterday(date1, date2) {
+    const yesterday = new Date(date1);
+    yesterday.setDate(yesterday.getDate() - 1);
+    return isSameDay(yesterday, date2);
+}
+
+// Function to format date with day (e.g., 11 Jun 2023)
+function formatDateWithDay(date) {
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+}
+
+// Function to format date with time and AM/PM (e.g., 2:30 PM)
+function formatDateWithAmPm(date) {
+    const options = { hour: "numeric", minute: "numeric", hour12: true };
+    return date.toLocaleTimeString("en-US", options);
+}
+
+// Example usage
+
+window.onload=function(){
+    const firebaseConfig = {
+    apiKey: "AIzaSyBJLunaVFMT0OKJBEBM3exOgUCl7WuKl00",
+      authDomain: "hurtless-33668.firebaseapp.com",
+      projectId: "hurtless-33668",
+      storageBucket: "hurtless-33668.appspot.com",
+      messagingSenderId: "1037111034293",
+      appId: "1:1037111034293:web:2b22b203d4f55884f019fc",
+      measurementId: "G-MN87Y7MHNN"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+
+ 
+
+
+firebase.database().ref("data/"+ref_).on("child_added", (snapshot) => {
+    let sender_string = snapshot.val().string;
+    let sender=snapshot.val().sender;
+    let message = snapshot.val().message;
+let time = snapshot.val().time;
+    let messageClass = string === sender_string ? "sent" : "received";
+    var bs="";
+    if(messageClass=="sent"){
+        messageClass="sent";
+        bs="bs";
+    }else{
+        
+        messageClass="received";
+        bs="";
+    }
+    
+    
+    
+    // Create the main div element with the "message" class
+const messageDiv = document.createElement('div');
+messageDiv.classList.add('message', messageClass);
+
+// Create a text node for the message content
+const messageText = document.createTextNode(message);
+
+// Create the metadata span element
+const metadataSpan = document.createElement('span');
+metadataSpan.classList.add('metadata');
+
+// Create the name span element
+const nameSpan = document.createElement('span');
+nameSpan.classList.add('name');
+nameSpan.textContent = sender+"   "+" ";
+nameSpan.style.marginRight="2px";
+// Create the time span element
+const timeSpan = document.createElement('span');
+timeSpan.classList.add('time');
+timeSpan.textContent = formatTimestamp(time);
+
+// Append the name and time spans to the metadata span
+metadataSpan.appendChild(nameSpan);
+metadataSpan.appendChild(timeSpan);
+
+// Append the message text and metadata span to the main div
+messageDiv.appendChild(messageText);
+messageDiv.appendChild(metadataSpan);
+
+// Append the message div to the document body or another desired location
+
+
+    
+    conversation.insertAdjacentHTML("beforeend", messageDiv.outerHTML);
+
+    conversation.scrollTop = conversation.scrollHeight;
+});
+
+
+
+let isFirstLoad = true;
+    firebase.database().ref("c/"+"clearChatSignal"+ref_).on("value", (snapshot) => {
+    
+    if (!isFirstLoad) {
+    
+   
+   conversation.innerHTML = `
+    <div class="message received system">
+   Chat has been cleared
+        <span class="metadata">
+          <span class="name">system</span>
+           <span class="time">${formatTimestamp(Date.now())}</span>
+        </span>
+      </div>
+  <div id="infoDiv">
+        This is created and being managed by furqanelahie
+    </div>
+    `;
+    
+    }
+    
+    isFirstLoad = false;
+    
+});
+
+
+
+
+    
+    
+    
+    
+    let isFirstLoad2 = true;
+    let isFirstLoad3 = true;
+
+// Replace with your user ID
+
+
+firebase.database().ref("c/typingSignal"+ref_).on("value", (snapshot) => {
+
+if(
+    !isFirstLoad3
+){
+
+    const typingUser = snapshot.val();
+
+    if (typingUser.name == name) {
+        // Clear the typing status since you are typing
+        
+    } else {
+        // Display typing status
+        em(".status").textContent = typingUser.name+" is typing...";
+        em("#spp").textContent = typingUser.name+" is typing...";
+        
+        
+    } 
+    
+     }else{
+        
+        
+    isFirstLoad2=false;
+    }
+    
+    
+    }
+);
+
+
+
+firebase.database().ref("c/nottypingSignal"+ref_).on("value", (snapshot) => {
+
+if(
+    !isFirstLoad3
+){
+
+    const nottypingUser = snapshot.val();
+
+    if (nottypingUser.name == name) {
+        // Clear the typing status since you are typing
+        
+    } else {
+        // Display typing status
+      em(".status").textContent = "";
+       em("#spp").textContent = "";
+      
+    } 
+    
+     }else{
+        
+        
+    isFirstLoad3=false;
+    }
+});
+    
+    
+    
+    
+   
+    
+
+    
+    
+    const inputField = em(".input-msg");
+
+let typingTimeout;
+
+inputField.addEventListener('input', () => {
+
+    clearTimeout(typingTimeout);
+
+    // Update typing status
+    firebase.database().ref("c/typingSignal"+ref_).set({name:name,time:Date.now()});
+
+    typingTimeout = setTimeout(() => {
+        // Clear typing status
+        firebase.database().ref("c/nottypingSignal"+ref_).set({name:name,time:Date.now()});
+        
+        
+        
+        
+    },1500); // Adjust the delay as needed
+});
+    }
+  // Listen for changes to the "clearChatSignal" reference
+
+const myUserId = name; 
+
+    
+
+function clearChats() { if (confirm("Are you sure you want to clear all chats  for all?")) { // Remove messages from the databas
+
+
+ firebase.database().ref("data/"+ref_).remove(); // Update the "clearChatSignal" value to the current timestamp
+ 
+ 
+  firebase.database().ref("c/clearChatSignal"+ref_).set(Date.now()); 
+  
+  c2.innerHTML=` 
+  <div id="infoDiv">
+        This is created and being managed by furqanelahie
+    </div>`;
+  
+  
+} }
+  
+
+
+
+
+</script>
+<script>
+              // Time setup 
+
+
+form.addEventListener('submit', newMessage);
+
+
+
+
+
+</script>
+
+</body>
+</html>
